@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data.Linq;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -754,6 +755,13 @@ namespace WowDB
         private void CopyMenuItem_OnClick(object sender, RoutedEventArgs e)
         {
             System.Windows.Forms.Clipboard.SetText(((LogListViewItem)logListView.SelectedItem).Item.ToString());
+        }
+
+        private void listitems() {
+            HIF3eWOWDBEntities db = new HIF3eWOWDBEntities();
+            var erg =
+                from i in db.item_template
+                select i;
         }
     }
 }
