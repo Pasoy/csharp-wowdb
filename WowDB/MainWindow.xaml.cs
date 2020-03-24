@@ -113,12 +113,10 @@ namespace WowDB
                     _count++;
                     _size += (logItem).ToString().Length;
 
-                    msgCount.Text = _count.ToString(CultureInfo.CurrentCulture);
-                    sumMsgCount.Text = Log.Messages.Count.ToString();
+                    entriesCount.Text = _count.ToString(CultureInfo.CurrentCulture);
+                    sumEntriesCount.Text = Log.Messages.Count.ToString();
 
                     var fs = Utils.GetFileSize(_size).Split(' ');
-                    msgSize.Text = fs[0];
-                    msgUnit.Text = fs[1];
 
                 }));
             }
@@ -183,11 +181,9 @@ namespace WowDB
 
 
             var fs = Utils.GetFileSize(_size).Split(' ');
-            msgSize.Text = fs[0];
-            msgUnit.Text = fs[1];
 
-            msgCount.Text = _count.ToString(CultureInfo.InvariantCulture);
-            sumMsgCount.Text = Log.Messages.Count.ToString(CultureInfo.InvariantCulture);
+            entriesCount.Text = _count.ToString(CultureInfo.InvariantCulture);
+            sumEntriesCount.Text = Log.Messages.Count.ToString(CultureInfo.InvariantCulture);
 
             _currentLogListViewItems.Clear();
             foreach (var item in logListView.Items)
@@ -623,8 +619,8 @@ namespace WowDB
                 Log.Messages.TryTake(out entry);
             }
             logListView.Items.Clear();
-            msgCount.Text = "0";
-            sumMsgCount.Text = "0";
+            entriesCount.Text = "0";
+            sumEntriesCount.Text = "0";
         }
 
         private void btnClear_MouseEnter(object sender, MouseEventArgs e)
@@ -674,7 +670,7 @@ namespace WowDB
                     logListView.Items.Add(item);
                 }
                 ScrollToEnd();
-                msgCount.Text = _currentLogListViewItems.Count.ToString();
+                entriesCount.Text = _currentLogListViewItems.Count.ToString();
             }
             else
             {
@@ -693,7 +689,7 @@ namespace WowDB
                 }
 
                 ScrollToEnd();
-                msgCount.Text = _count.ToString();
+                entriesCount.Text = _count.ToString();
 
                 /*
                  foreach (var entry in (itemCollection as LogListViewItem)
