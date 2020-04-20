@@ -112,17 +112,13 @@
                 <Rectangle Height="1" VerticalAlignment="Bottom" Fill="#16161A"/>
                 <StackPanel x:Name="SPLevels" Orientation="Vertical" Margin="10,10,0,0">
                     <Label Content="Filters" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFFFFE" FontSize="16" />
-                    <StackPanel x:Name="SPTrace" Orientation="Horizontal" Margin="-10, 0, 0, 0" MouseEnter="SPTrace_MouseEnter" MouseLeave="SPTrace_MouseLeave" MouseLeftButtonUp="SPTrace_MouseLeftButtonUp">
+                    <StackPanel x:Name="SPTrace" Orientation="Horizontal" Margin="-10, 0, 0, 0" MouseEnter="SPTrace_MouseEnter" MouseLeave="SPTrace_MouseLeave" MouseLeftButtonUp="SPTrace_MouseLeftButtonUp" >
                         <Image HorizontalAlignment="Left" Source="Images/inv_misc_bag_07_black.jpg" Height="16" Width="16" Margin="10, 0, 0, 0"/>
                         <Label x:Name="lblTrace" Content="Items" Foreground="#91A1B2"/>
                     </StackPanel>
                     <StackPanel x:Name="SPDebug" Orientation="Horizontal" Margin="-10, 0, 0, 0" MouseEnter="SPDebug_MouseEnter" MouseLeave="SPDebug_MouseLeave" MouseLeftButtonUp="SPDebug_MouseLeftButtonUp">
                         <Image HorizontalAlignment="Left" Source="Images/characters.png" Height="16" Width="16" Margin="10, 0, 0, 0"/>
                         <Label x:Name="lblDebug" Content="Characters" Foreground="#91A1B2"/>
-                    </StackPanel>
-                    <StackPanel x:Name="SPInfo" Orientation="Horizontal" Margin="-10, 0, 0, 0" MouseEnter="SPInfo_MouseEnter" MouseLeave="SPInfo_MouseLeave" MouseLeftButtonDown="SPInfo_MouseLeftButtonDown">
-                        <Image HorizontalAlignment="Left" Source="Images/maps.png" Height="16" Width="16" Margin="10, 0, 0, 0"/>
-                        <Label x:Name="lblInfo" Content="World" Foreground="#91A1B2"/>
                     </StackPanel>
                     <StackPanel x:Name="SPWarn" Orientation="Horizontal" Margin="-10, 0, 0, 0" MouseEnter="SPWarn_MouseEnter" MouseLeave="SPWarn_MouseLeave" MouseLeftButtonUp="SPWarn_MouseLeftButtonUp">
                         <Image HorizontalAlignment="Left" Source="Images/achievements.png" Height="16" Width="16" Margin="10, 0, 0, 0"/>
@@ -136,11 +132,7 @@
                         <Image HorizontalAlignment="Left" Source="Images/fire.png" Height="16" Width="16" Margin="10, 0, 0, 0"/>
                         <Label x:Name="lblFatal" Content="Other" Foreground="#91A1B2"/>
                     </StackPanel>
-                    <Label Content="Something" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Foreground="#FFFFFE" FontSize="16" /> 
-                    <StackPanel x:Name="SPExclusive" Orientation="Horizontal" MouseLeftButtonUp="SPExclusive_MouseLeftButtonUp">
-                        <Image x:Name="imgExclusive" HorizontalAlignment="Left" VerticalAlignment="Top" Source="Images/unchecked.png" Height="16" Width="16"/>
-                        <TextBlock TextWrapping="Wrap" Foreground="#91A1B2" Text="Show only the selected filter level(s)" Width="115"/>
-                    </StackPanel>
+
 
                 </StackPanel>                              
             </Grid>

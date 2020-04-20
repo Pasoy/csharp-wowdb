@@ -22,10 +22,28 @@ namespace WowDB
     {
         private bool _exclusive;
         private bool _autoScroll;
-
+        public Object CBoxItem;
         private volatile int _count, _size;
         private Log.Level _filterLevel = Log.Level.Trace;
         private readonly ICollection<LogListViewItem> _currentLogListViewItems = new List<LogListViewItem>();
+
+        public Decimal SelObject
+        {
+            get
+            {
+                var input = CbLoggingLevel.SelectedItem;
+                if (input == "Rogue") { return 31240; } //tables: item_template, -1 All; 8,31240 Rogue; 31488 Warlock; 31360 Mage; 31296 Shaman; 31248 Priest; 31236 Hunter; 31234 Paladin; 31233 Warrior; 
+                if (input == "Warlock") { return 31488; }
+                if (input == "Mage") { return 31360; }
+                if (input == "Shaman") { return 31296; }
+                if (input == "Priest") { return 31248; }
+                if (input == "Hunter") { return 31236; }
+                if (input == "Paladin") { return 31234; }
+                if (input == "Warrior") { return 31233; }
+                else return -1;
+            }
+            
+        }
 
         public MainWindow()
         {
@@ -704,44 +722,7 @@ namespace WowDB
             }
         }
 
-        private void BDummy_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            for (var i = 0; i < 1; i++)
-            {
-                Log.Trace("Ez egy trace");
-                Log.Debug("Ez egy debug");
-                Log.Info("Ez egy info");
-                Log.Warn("Ez egy warn");
-                Log.Error("Ez egy error");
-                Log.Fatal("Ez egy fatal");
-            }
-        }
-
-        private void CbLoggingLevel_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var comboBox = (System.Windows.Controls.ComboBox)sender;
-            switch (comboBox.SelectedIndex)
-            {
-                case 0:
-                    Log.SetLevel(Log.Level.Trace);
-                    break;
-                case 1:
-                    Log.SetLevel(Log.Level.Debug);
-                    break;
-                case 2:
-                    Log.SetLevel(Log.Level.Info);
-                    break;
-                case 3:
-                    Log.SetLevel(Log.Level.Warn);
-                    break;
-                case 4:
-                    Log.SetLevel(Log.Level.Error);
-                    break;
-                case 5:
-                    Log.SetLevel(Log.Level.Fatal);
-                    break;
-            }
-        }
+       
 
         private void logListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -753,11 +734,28 @@ namespace WowDB
             System.Windows.Forms.Clipboard.SetText(((LogListViewItem)logListView.SelectedItem).Item.ToString());
         }
 
-        private void listitems() {
+        private void listitems() { //items_template
             HIF3eWOWDBEntities db = new HIF3eWOWDBEntities();
             var erg =
                 from i in db.item_template
-                select i;
+                where i.AllowableClass == SelObject
+                select new { i.name, i.description, i.ItemLevel };
+        }
+
+        private void listcreatures() {
+            HIF3eWOWDBEntities db = new HIF3eWOWDBEntities();
+            var erg =
+                from i in db.creature_template
+                select new { i.Name, i.SubName, i.MaxLevel };
+        }
+
+        private void listachievements()
+        {
+            HIF3eWOWDBEntities db = new HIF3eWOWDBEntities();
+            var erg =
+                from i in db.achievement_reward
+                where i.subject != null && i.text != null
+                select new { i.subject, i.text};
         }
     }
 }
