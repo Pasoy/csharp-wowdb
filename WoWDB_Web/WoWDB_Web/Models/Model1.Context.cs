@@ -289,7 +289,5 @@ namespace WoWDB_Web.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
-
-        public System.Data.Entity.DbSet<WoWDB_Web.Models.Character> Characters { get; set; }
     }
 }

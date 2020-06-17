@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6f1c13ba55fd4b45a0b95e4d077b6c97" Name="Diagram1">
+      <Diagram DiagramId="6f1c13ba55fd4b45a0b95e4d077b6c97" Name="Diagram1" ZoomLevel="74">
         <EntityTypeShape EntityType="HIF3eWOWDBModel.achievement_criteria_requirement" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HIF3eWOWDBModel.achievement_reward" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HIF3eWOWDBModel.areatrigger_involvedrelation" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
