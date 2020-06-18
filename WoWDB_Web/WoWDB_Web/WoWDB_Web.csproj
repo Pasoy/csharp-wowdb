@@ -150,6 +150,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Achievements.cs" />
     <Compile Include="Models\achievement_criteria_requirement.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -190,6 +191,7 @@
     <Compile Include="Models\creature.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Creatures.cs" />
     <Compile Include="Models\creature_addon.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -431,6 +433,7 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\MyDBContext.cs" />
+    <Compile Include="Models\NPC.cs" />
     <Compile Include="Models\npc_gossip.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -578,6 +581,7 @@
     <Compile Include="Models\spam_records.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Spells.cs" />
     <Compile Include="Models\spell_affect.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
