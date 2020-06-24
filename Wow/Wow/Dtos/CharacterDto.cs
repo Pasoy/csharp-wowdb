@@ -17,9 +17,11 @@ namespace Wow.Dtos
 
         [Required]
         public byte ClassId { get; set; }
+        public ClassDto Class { get; set; }
 
         [Required]
         public byte RaceId { get; set; }
+        public RaceDto Race { get; set; }
 
         public DateTime DateCreated { get; set; }
 

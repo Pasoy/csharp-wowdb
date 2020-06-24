@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,9 +26,13 @@ namespace Wow.Controllers.Api
         }
 
         [HttpGet]
-        public IHttpActionResult GetCharacters()
+        public IEnumerable<CharacterDto> GetCharacters()
         {
-            return Ok(_context.Characters.ToList().Select(Mapper.Map<Character, CharacterDto>));
+            return _context.Characters
+                .Include(c => c.Class)
+                .Include(c => c.Race)
+                .ToList()
+                .Select(Mapper.Map<Character, CharacterDto>);
         }
 
         [HttpGet]
