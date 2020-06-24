@@ -200,6 +200,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\CharactersController.cs" />
+    <Compile Include="Controllers\Api\NewPickController.cs" />
     <Compile Include="Controllers\Api\PlayersController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\PlayersController.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Dtos\CharacterDto.cs" />
     <Compile Include="Dtos\ClassDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
+    <Compile Include="Dtos\NewPickDto.cs" />
     <Compile Include="Dtos\PlayerDto.cs" />
     <Compile Include="Dtos\RaceDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -295,6 +297,18 @@
     <Compile Include="Migrations\202006242043017_AddCityToUser.Designer.cs">
       <DependentUpon>202006242043017_AddCityToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006242119175_AddPicks.cs" />
+    <Compile Include="Migrations\202006242119175_AddPicks.Designer.cs">
+      <DependentUpon>202006242119175_AddPicks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006242125061_AddIsAvailableToCharacter.cs" />
+    <Compile Include="Migrations\202006242125061_AddIsAvailableToCharacter.Designer.cs">
+      <DependentUpon>202006242125061_AddIsAvailableToCharacter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006242127503_AddIsAvailableToCharacter1.cs" />
+    <Compile Include="Migrations\202006242127503_AddIsAvailableToCharacter1.Designer.cs">
+      <DependentUpon>202006242127503_AddIsAvailableToCharacter1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Character.cs" />
@@ -303,6 +317,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
     <Compile Include="Models\Min18YearsIfPlayer.cs" />
+    <Compile Include="Models\Pick.cs" />
     <Compile Include="Models\Player.cs" />
     <Compile Include="Models\Race.cs" />
     <Compile Include="Models\RoleName.cs" />
@@ -631,6 +646,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006242043017_AddCityToUser.resx">
       <DependentUpon>202006242043017_AddCityToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006242119175_AddPicks.resx">
+      <DependentUpon>202006242119175_AddPicks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006242125061_AddIsAvailableToCharacter.resx">
+      <DependentUpon>202006242125061_AddIsAvailableToCharacter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006242127503_AddIsAvailableToCharacter1.resx">
+      <DependentUpon>202006242127503_AddIsAvailableToCharacter1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -30,5 +30,7 @@ namespace Wow.Models
         public DateTime ReleaseDate { get; set; }
 
         public string Gender { get; set; }
+
+        public byte isAvailable { get; set; }
     }
 }

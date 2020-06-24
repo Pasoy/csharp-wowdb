@@ -31,6 +31,7 @@ namespace Wow.Models
         public DbSet<Class> Classes { get; set; }
         public DbSet<Race> Races { get; set; }
         public DbSet<Side> Sides { get; set; }
+        public DbSet<Pick> Picks { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
