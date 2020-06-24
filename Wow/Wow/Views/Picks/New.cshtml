@@ -9,14 +9,14 @@
     <div class="form-group">
         <label>Player</label>
         <div class="tt-container">
-            <input id="player" type="text" value="" class="form-control" />
+            <input id="player" name="player" data-rule-validPlayer="true" required type="text" value="" class="form-control" />
         </div>
     </div>
 
     <div class="form-group">
         <label>Character</label>
         <div class="tt-container">
-            <input id="character" type="text" value="" class="form-control" />
+            <input id="character" name="character" data-rule-AvailablePick="true" type="text" value="" class="form-control" />
         </div>
     </div>
 
@@ -30,8 +30,9 @@
 </form>
 @section scripts
 {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
-        $(document).ready(function () {
+        $(document).ready(function() {
             var vm = {
                 characterIds: []
             };
@@ -44,15 +45,17 @@
                 }
             });
             $('#player').typeahead({
-                minLength: 1,
-                highlight: true
-            }, {
-                name: 'players',
-                display: 'name',
-                source: players
-            }).on("typeahead:select", function(e, player) {
-                vm.playerId = player.id;
-            });
+                    minLength: 1,
+                    highlight: true
+                },
+                {
+                    name: 'players',
+                    display: 'name',
+                    source: players
+                }).on("typeahead:select",
+                function(e, player) {
+                    vm.playerId = player.id;
+                });
             var characters = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -62,29 +65,49 @@
                 }
             });
             $('#character').typeahead({
-                minLength: 1,
-                highlight: true
-            }, {
-                name: 'characters',
-                display: 'name',
-                source: characters
-            }).on("typeahead:select", function (e, character) {
-                $("#characters").append("<li class='list-group-item'>" + character.name + "</li>");
-                $("#character").typeahead("val", "");
-                vm.characterIds.push(character.id);
-            });
-            $("#newPick").submit(function (e) {
-                e.preventDefault();
-                $.ajax({
-                    url: "/api/newPicks",
-                    method: "post",
-                    data: vm
-                })
-                .done(function () {
-                    console.log("done");
-                })
-                .fail(function () {
+                    minLength: 1,
+                    highlight: true
+                },
+                {
+                    name: 'characters',
+                    display: 'name',
+                    source: characters
+                }).on("typeahead:select",
+                function(e, character) {
+                    $("#characters").append("<li class='list-group-item'>" + character.name + "</li>");
+                    $("#character").typeahead("val", "");
+                    vm.characterIds.push(character.id);
                 });
+            $.validator.addMethod("validPlayer",
+                function() {
+                    return vm.playerId && vm.playerId !== 0;
+                },
+                "Please select a valid player.");
+            $.validator.addMethod("AvailablePick",
+                function() {
+                    return vm.characterIds.length === 1;
+                },
+                "Please select at least one character.");
+            var validator = $("#newPick").validate({
+                submitHandler: function() {
+                    $.ajax({
+                            url: "/api/newPicks",
+                            method: "post",
+                            data: vm
+                        })
+                        .done(function() {
+                            toastr.success("Characters successfully picked.");
+                            $("#player").typeahead("val", "");
+                            $("#character").typeahead("val", "");
+                            $("#characters").empty();
+                            vm = { characterIds: [] };
+                            validator.resetForm();
+                        })
+                        .fail(function() {
+                            toastr.error("Something unexpected happened.");
+                        });
+                    return false;
+                }
             });
         });
     </script>
