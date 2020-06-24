@@ -1,0 +1,25 @@
+﻿@model Wow.ViewModels.RandomCharacterViewModel
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var className = Model.Players.Count > 0 ? "popular" : null;
+}
+
+<h2 class="@className">@Model.Character.Name</h2>
+
+@if (Model.Players.Count == 0)
+{
+    <text>No one has created this character before.</text>
+}
+else
+{
+    <ul>
+        @foreach (var player in Model.Players)
+        {
+            <li>@player.Name</li>
+        }
+    </ul>
+}

@@ -1,0 +1,13 @@
+﻿@model Wow.Models.Character
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Name</h2>
+<ul>
+    <li>Class: @Model.Class.Name</li>
+    <li>Race: @Model.Race.Name</li>
+    <li>Release Date: @Model.ReleaseDate.ToLongDateString()</li>
+    <li>Date Added: @Model.DateCreated.ToLongDateString()</li>
+</ul>

@@ -1,0 +1,46 @@
+﻿@model Wow.ViewModels.CharacterFormViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Characters"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ClassId)
+        @Html.DropDownListFor(m => m.ClassId, new SelectList(Model.Classes, "Id", "Name"), "Select a Class", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ClassId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.RaceId)
+        @Html.DropDownListFor(m => m.RaceId, new SelectList(Model.Classes, "Id", "Name"), "Select a Race", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.RaceId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ReleaseDate)
+        @Html.TextBoxFor(m => m.ReleaseDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ReleaseDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Gender)
+        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Gender)
+    </div>
+
+    @Html.HiddenFor(m => m.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

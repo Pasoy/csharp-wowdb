@@ -1,0 +1,44 @@
+﻿@model Wow.ViewModels.PlayerFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Player</h2>
+
+@using (Html.BeginForm("Save", "Players"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Player.Name)
+        @Html.TextBoxFor(m => m.Player.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Player.Name)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Player.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Player.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select Membership Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Player.MembershipTypeId)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Player.Birthdate)
+        @Html.TextBoxFor(m => m.Player.Birthdate, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Player.Birthdate)
+    </div>
+
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Player.IsSubscribed) Subscribed to Game?
+        </label>
+    </div>
+
+    @Html.HiddenFor(m => m.Player.Id)
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Wow.Models.Character>
+
+@{
+    ViewBag.Title = "Characters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Characters</h2>
+<p>
+    @Html.ActionLink("New Character", "New", "Characters", null, new { @class = "btn btn-primary" })
+</p>
+<table class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>Character</th>
+        <th>Class</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var character in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(character.Name, "Edit", "Characters", new {id = character.Id}, null)</td>
+            <td>@character.Class.Name</td>
+        </tr>
+    }
+    </tbody>
+</table>
