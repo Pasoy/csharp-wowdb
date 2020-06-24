@@ -6,11 +6,11 @@ using Wow.Models;
 
 namespace Wow.Controllers.Api
 {
-    public class NewPickController : ApiController
+    public class NewPicksController : ApiController
     {
         private ApplicationDbContext _context;
 
-        public NewPickController()
+        public NewPicksController()
         {
             _context = new ApplicationDbContext();
         }

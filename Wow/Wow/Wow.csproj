@@ -200,7 +200,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\CharactersController.cs" />
-    <Compile Include="Controllers\Api\NewPickController.cs" />
+    <Compile Include="Controllers\Api\NewPicksController.cs" />
     <Compile Include="Controllers\Api\PlayersController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\PicksController.cs" />
