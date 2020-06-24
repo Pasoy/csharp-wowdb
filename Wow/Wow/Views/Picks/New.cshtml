@@ -1,0 +1,91 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "New Pick Form";
+}
+
+<h2>New Pick Form</h2>
+
+<form id="newPick">
+    <div class="form-group">
+        <label>Player</label>
+        <div class="tt-container">
+            <input id="player" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Character</label>
+        <div class="tt-container">
+            <input id="character" type="text" value="" class="form-control" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-sm-4">
+            <ul id="characters" class="list-group"></ul>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Submit</button>
+</form>
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var vm = {
+                characterIds: []
+            };
+            var players = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/players?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            $('#player').typeahead({
+                minLength: 1,
+                highlight: true
+            }, {
+                name: 'players',
+                display: 'name',
+                source: players
+            }).on("typeahead:select", function(e, player) {
+                vm.playerId = player.id;
+            });
+            var characters = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/characters?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+            $('#character').typeahead({
+                minLength: 1,
+                highlight: true
+            }, {
+                name: 'characters',
+                display: 'name',
+                source: characters
+            }).on("typeahead:select", function (e, character) {
+                $("#characters").append("<li class='list-group-item'>" + character.name + "</li>");
+                $("#character").typeahead("val", "");
+                vm.characterIds.push(character.id);
+            });
+            $("#newPick").submit(function (e) {
+                e.preventDefault();
+                $.ajax({
+                    url: "/api/newPicks",
+                    method: "post",
+                    data: vm
+                })
+                .done(function () {
+                    console.log("done");
+                })
+                .fail(function () {
+                });
+            });
+        });
+    </script>
+}

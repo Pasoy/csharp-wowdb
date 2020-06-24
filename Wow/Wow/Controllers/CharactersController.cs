@@ -25,7 +25,7 @@ namespace Wow.Controllers
 
         public ViewResult Index()
         {
-            if (User.IsInRole(RoleName.CanManageMovies))
+            if (User.IsInRole(RoleName.CanManageCharacters))
             {
                 return View("List");
             }
@@ -33,7 +33,7 @@ namespace Wow.Controllers
             return View("ReadOnlyList");
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public ViewResult New()
         {
             var classes = _context.Classes.ToList();
@@ -48,7 +48,7 @@ namespace Wow.Controllers
             return View("CharacterForm", viewModel);
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public ActionResult Edit(int id)
         {
             var character = _context.Characters.SingleOrDefault(c => c.Id == id);
@@ -65,7 +65,7 @@ namespace Wow.Controllers
             return View("CharacterForm", viewModel);
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public ActionResult Details(int id)
         {
             var character = _context.Characters.Include(c => c.Class).Include(c => c.Race).SingleOrDefault(c => c.Id == id);
@@ -78,7 +78,7 @@ namespace Wow.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public ActionResult Save(Character character)
         {
             if (!ModelState.IsValid)
@@ -95,6 +95,7 @@ namespace Wow.Controllers
             if (character.Id == 0)
             {
                 character.DateCreated = DateTime.Now;
+                character.isAvailable = 1;
                 _context.Characters.Add(character);
             }
             else

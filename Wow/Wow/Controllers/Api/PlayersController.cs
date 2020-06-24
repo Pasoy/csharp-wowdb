@@ -27,14 +27,19 @@ namespace Wow.Controllers.Api
 
         // GET /api/players
         [HttpGet]
-        public IHttpActionResult GetPlayers()
+        public IHttpActionResult GetPlayers(string query = null)
         {
-            var playerDtos = _context.Players
-                .Include(p => p.MembershipType)
+            var playersQuery = _context.Players
+                .Include(c => c.MembershipType);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                playersQuery = playersQuery.Where(c => c.Name.Contains(query));
+
+            var customerDtos = playersQuery
                 .ToList()
                 .Select(Mapper.Map<Player, PlayerDto>);
 
-            return Ok(playerDtos);
+            return Ok(customerDtos);
         }
 
         // GET /api/players/1

@@ -26,11 +26,17 @@ namespace Wow.Controllers.Api
         }
 
         [HttpGet]
-        public IEnumerable<CharacterDto> GetCharacters()
+        public IEnumerable<CharacterDto> GetCharacters(string query = null)
         {
-            return _context.Characters
+            var charactersQuery = _context.Characters
                 .Include(c => c.Class)
                 .Include(c => c.Race)
+                .Where(c => c.isAvailable == 1);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                charactersQuery = charactersQuery.Where(c => c.Name.Contains(query));
+
+            return charactersQuery
                 .ToList()
                 .Select(Mapper.Map<Character, CharacterDto>);
         }
@@ -47,7 +53,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpPost]
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public IHttpActionResult CreateCharacter(CharacterDto characterDto)
         {
             if (!ModelState.IsValid)
@@ -62,7 +68,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpPut]
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public IHttpActionResult UpdateCharacter(int id, CharacterDto characterDto)
         {
             if (!ModelState.IsValid)
@@ -81,7 +87,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpDelete]
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageCharacters)]
         public IHttpActionResult DeleteCharacter(int id)
         {
             var characterInDb = _context.Characters.SingleOrDefault(c => c.Id == id);
