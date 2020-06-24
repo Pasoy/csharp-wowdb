@@ -25,10 +25,15 @@ namespace Wow.Controllers
 
         public ViewResult Index()
         {
-            var characters = _context.Characters.Include(m => m.Class).ToList();
+            if (User.IsInRole(RoleName.CanManageMovies))
+            {
+                return View("List");
+            }
 
-            return View(characters);
+            return View("ReadOnlyList");
         }
+
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ViewResult New()
         {
             var classes = _context.Classes.ToList();
@@ -43,6 +48,7 @@ namespace Wow.Controllers
             return View("CharacterForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var character = _context.Characters.SingleOrDefault(c => c.Id == id);
@@ -59,6 +65,7 @@ namespace Wow.Controllers
             return View("CharacterForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Details(int id)
         {
             var character = _context.Characters.Include(c => c.Class).Include(c => c.Race).SingleOrDefault(c => c.Id == id);
@@ -71,6 +78,7 @@ namespace Wow.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Save(Character character)
         {
             if (!ModelState.IsValid)
@@ -102,24 +110,6 @@ namespace Wow.Controllers
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Characters");
-        }
-
-        public ActionResult Random()
-        {
-            var characters = new Character() { Name = "Shrek!" };
-            var players = new List<Player>
-            {
-                new Player { Name = "Player 1" },
-                new Player { Name = "Player 2" }
-            };
-
-            var viewModel = new RandomCharacterViewModel()
-            {
-                Character = characters,
-                Players = players
-            };
-
-            return View(viewModel);
         }
     }
 }

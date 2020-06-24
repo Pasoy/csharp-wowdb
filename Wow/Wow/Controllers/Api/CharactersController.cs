@@ -47,6 +47,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult CreateCharacter(CharacterDto characterDto)
         {
             if (!ModelState.IsValid)
@@ -61,6 +62,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult UpdateCharacter(int id, CharacterDto characterDto)
         {
             if (!ModelState.IsValid)
@@ -79,6 +81,7 @@ namespace Wow.Controllers.Api
         }
 
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public IHttpActionResult DeleteCharacter(int id)
         {
             var characterInDb = _context.Characters.SingleOrDefault(c => c.Id == id);

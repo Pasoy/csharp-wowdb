@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Wow.Models.Character>
+
+@{
+    ViewBag.Title = "Characters";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Characters</h2>
+
+<table id="characters" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Character</th>
+            <th>Class</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#characters").DataTable({
+                ajax: {
+                    url: "/api/characters",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "class.name"
+                    }
+                ]
+            });
+        });
+    </script>
+}
