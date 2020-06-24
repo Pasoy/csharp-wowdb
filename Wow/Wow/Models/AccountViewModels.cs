@@ -65,6 +65,10 @@ namespace Wow.Models
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "City")]
+        public string City { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
