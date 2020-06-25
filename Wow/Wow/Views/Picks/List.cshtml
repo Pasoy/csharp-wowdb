@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Wow.Models.Pick>
+
+@{
+    ViewBag.Title = "Picks";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Picks</h2>
+<p>
+    @Html.ActionLink("New Pick", "New", "Picks", null, new { @class = "btn btn-primary" })
+</p>
+<table id="picks" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Character</th>
+            <th>Picked by</th>
+            <th>Revoke</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#picks").DataTable({
+                ajax: {
+                    url: "/api/picks",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "character.name",
+                        render: function (data, type, pick) {
+                            return "<a href='/characters/edit/" + pick.character.id + "'>" + pick.character.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "player.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-revoke' data-pick-id=" + data + ">Revoke</button>";
+                        }
+                    }
+                ]
+            });
+            $("#picks").on("click", ".js-revoke", function () {
+                var button = $(this);
+                bootbox.confirm("Are you sure you want to revoke this character?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/picks/" + button.attr("data-pick-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Wow.Models;
 
 namespace Wow.Controllers
 {
@@ -12,6 +13,11 @@ namespace Wow.Controllers
         public ActionResult New()
         {
             return View();
+        }
+
+        public ActionResult Index()
+        {
+            return View("List");
         }
     }
 }

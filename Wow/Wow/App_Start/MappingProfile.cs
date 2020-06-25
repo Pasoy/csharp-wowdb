@@ -15,6 +15,7 @@ namespace Wow.App_Start
             // Domain to Dto
             Mapper.CreateMap<Player, PlayerDto>();
             Mapper.CreateMap<Character, CharacterDto>();
+            Mapper.CreateMap<Pick, PickDto>();
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
             Mapper.CreateMap<Class, ClassDto>();
             Mapper.CreateMap<Race, RaceDto>();

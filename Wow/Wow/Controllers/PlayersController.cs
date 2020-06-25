@@ -24,6 +24,11 @@ namespace Wow.Controllers
             _context.Dispose();
         }
 
+        public ViewResult Index()
+        {
+            return View();
+        }
+
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -66,11 +71,6 @@ namespace Wow.Controllers
             return RedirectToAction("Index", "Players");
         }
 
-        public ViewResult Index()
-        {
-            return View();
-        }
-
         public ActionResult Details(int id)
         {
             var player = _context.Players.Include(c => c.MembershipType).SingleOrDefault(p => p.Id == id);
@@ -80,6 +80,7 @@ namespace Wow.Controllers
 
             return View(player);
         }
+
 
         public ActionResult Edit(int id)
         {

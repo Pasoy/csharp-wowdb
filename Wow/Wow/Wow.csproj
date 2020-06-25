@@ -200,7 +200,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\CharactersController.cs" />
-    <Compile Include="Controllers\Api\NewPicksController.cs" />
+    <Compile Include="Controllers\Api\PicksController.cs" />
     <Compile Include="Controllers\Api\PlayersController.cs" />
     <Compile Include="Controllers\CharactersController.cs" />
     <Compile Include="Controllers\PicksController.cs" />
@@ -211,7 +211,7 @@
     <Compile Include="Dtos\CharacterDto.cs" />
     <Compile Include="Dtos\ClassDto.cs" />
     <Compile Include="Dtos\MembershipTypeDto.cs" />
-    <Compile Include="Dtos\NewPickDto.cs" />
+    <Compile Include="Dtos\PickDto.cs" />
     <Compile Include="Dtos\PlayerDto.cs" />
     <Compile Include="Dtos\RaceDto.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
@@ -309,6 +309,10 @@
     <Compile Include="Migrations\202006242127503_AddIsAvailableToCharacter1.cs" />
     <Compile Include="Migrations\202006242127503_AddIsAvailableToCharacter1.Designer.cs">
       <DependentUpon>202006242127503_AddIsAvailableToCharacter1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006251118175_UpdatePicks.cs" />
+    <Compile Include="Migrations\202006251118175_UpdatePicks.Designer.cs">
+      <DependentUpon>202006251118175_UpdatePicks.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -585,6 +589,7 @@
     <Content Include="Views\Characters\CharacterForm.cshtml" />
     <Content Include="Views\Characters\ReadOnlyList.cshtml" />
     <Content Include="Views\Picks\New.cshtml" />
+    <Content Include="Views\Picks\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -671,6 +676,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006242127503_AddIsAvailableToCharacter1.resx">
       <DependentUpon>202006242127503_AddIsAvailableToCharacter1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006251118175_UpdatePicks.resx">
+      <DependentUpon>202006251118175_UpdatePicks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
