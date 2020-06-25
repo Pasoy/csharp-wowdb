@@ -6,10 +6,17 @@
 * RESTful
 * CRUD
 * APIs for both players, characters and picks
+  * With DTOs (Data Transer Objects)
+  * More
 * Datatables
+* User Roles
+  * Admin can create players / characters while guests can not
 * Authentication
   * **Admin** Email: `admin@wow.com` - Password: `admin&PW420HELP`
   * **Guest** Email: `guest@wow.com` - Password: `guest&PW420HELP` or create your own
+* Tried to minify security holes
+  * Anti-forgery
+  * Secure API requests
   
 ### Migrations  
 Built with the help of migrations  
