@@ -16,7 +16,7 @@ namespace Wow
                         "~/Scripts/DataTables/jquery.datatables.js",
                         "~/Scripts/DataTables/datatables.bootstrap.js",
                         "~/Scripts/typeahead.bundle.js",
-                        "~/scripts/toastr.js"));
+                        "~/Scripts/toastr.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
@@ -33,8 +33,8 @@ namespace Wow
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-lumen.css",
                       "~/Content/DataTables/css/datatables.bootstrap.css",
-                      "~/content/typeahead.css",
-                      "~/content/toastr.css",
+                      "~/Content/typeahead.css",
+                      "~/Content/toastr.css",
                       "~/Content/site.css"));
         }
     }
